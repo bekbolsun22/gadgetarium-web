@@ -1,9 +1,9 @@
-import React, { ForwardRefRenderFunction } from "react";
+import React, { ForwardRefRenderFunction, useCallback } from "react";
 import { InputAdornment, styled, TextField } from "@mui/material";
 
 interface InputProps {
   label?: string;
-  placeholder: string;
+  placeholder?: string;
   Icon?: React.ReactNode;
   value: string;
   type: string;
@@ -14,6 +14,14 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   { Icon, label, onChange, value, type, ...otherProps },
   ref
 ) => {
+  const viewIcon = useCallback(() => {
+    if (Icon) {
+      return {
+        endAdornment: <InputAdornment position="end">{Icon}</InputAdornment>,
+      };
+    }
+  }, [Icon]);
+
   return (
     <InputTextStyled
       fullWidth
@@ -22,9 +30,7 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
       onChange={onChange}
       value={value}
       type={type}
-      InputProps={{
-        endAdornment: <InputAdornment position="end">{Icon}</InputAdornment>,
-      }}
+      InputProps={viewIcon()}
       {...otherProps}
     />
   );
