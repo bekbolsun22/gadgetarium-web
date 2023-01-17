@@ -59,9 +59,9 @@ This folder contains reusable stateless and stateful components. It has followin
 
 This folder containes common presentational components(eg. Button, Input, etc.)
 
-`src/components/Company/Form/CreateCompanyForm.jsx`
+`src/components/Company/Form/CreateCompanyForm.tsx`
 
- Inside `src/components` we may have also other domain specific components like `src/components/Post/PostCard.jsx`
+ Inside `src/components` we may have also other domain specific components like `src/components/Post/PostCard.tsx`
 
 `src/pages`
 
@@ -75,7 +75,7 @@ This folder to define some objects or arrays and import them anywhere we want to
 
 We can define helper functions in this folder. There are some functions that we might need across application which generate some certain data or do something special. It’s better to keep them separate from components in order to make them reusable and make code cleaner.
 
-`src/utils/hooks`
+`src/utils/helpers/hooks`
 
 The hooks folder contains every single custom hook in your entire project. This is a useful folder to have in any size project since almost every project will have multiple custom hooks so having a single place to put them all is really useful.
 
