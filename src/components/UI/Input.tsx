@@ -1,17 +1,22 @@
 import React, { ForwardRefRenderFunction, useCallback } from "react";
-import { InputAdornment, styled, TextField } from "@mui/material";
+import {
+  InputAdornment,
+  styled,
+  TextField,
+  InputProps as inputProps,
+} from "@mui/material";
 
 interface InputProps {
-  label?: string;
   placeholder?: string;
   Icon?: React.ReactNode;
   value: string;
+  inputProps: inputProps;
   type: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
-  { Icon, label, onChange, value, type, ...otherProps },
+  { Icon, onChange, value, type, inputProps, placeholder, ...otherProps },
   ref
 ) => {
   const viewIcon = useCallback(() => {
@@ -26,26 +31,24 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
     <InputTextStyled
       fullWidth
       ref={ref}
-      label={label}
+      placeholder={placeholder}
       onChange={onChange}
       value={value}
       type={type}
-      InputProps={viewIcon()}
+      InputProps={{ ...viewIcon(), ...inputProps }}
       {...otherProps}
     />
   );
 };
 
-const FormInput = React.forwardRef(Input);
-
-export default FormInput;
+export default React.forwardRef(Input);
 
 const outlinedSelectors = [
   "& .MuiOutlinedInput-notchedOutline",
   "&:hover .MuiOutlinedInput-notchedOutline",
   "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline",
 ];
-const InputTextStyled = styled(TextField)(({}) => ({
+const InputTextStyled = styled(TextField)(() => ({
   borderRadius: "10px",
   backgroundColor: "#FAFAFA",
   border: "1px solid #909CB54D",
