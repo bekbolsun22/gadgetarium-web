@@ -2,10 +2,10 @@ import React, { FC } from "react";
 import { Button as MuiButton } from "@mui/material";
 import { IButtonProps } from "../../../types";
 
-export const Button: FC<IButtonProps> = (props) => {
+export const Button: FC<IButtonProps> = ({ variant, onClick, children }) => {
     return (
-        <MuiButton variant={props.variant} onClick={props.onClick}>
-            {props.label}
+        <MuiButton variant={variant} onClick={onClick}>
+            {children}
         </MuiButton>
     );
 };
