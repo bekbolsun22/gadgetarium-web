@@ -10,13 +10,21 @@ interface InputProps {
 	placeholder?: string
 	Icon?: React.ReactNode
 	value: string
-	inputProps: inputProps
-	type: string
+	InputProps?: inputProps
+	type?: string
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
-	{ Icon, onChange, value, type, inputProps, placeholder, ...otherProps },
+	{
+		Icon,
+		onChange,
+		value,
+		type = 'text',
+		InputProps,
+		placeholder,
+		...otherProps
+	},
 	ref,
 ) => {
 	const viewIcon = useCallback(() => {
@@ -37,7 +45,7 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
 			onChange={onChange}
 			value={value}
 			type={type}
-			InputProps={{ ...viewIcon(), ...inputProps }}
+			InputProps={{ ...viewIcon(), ...InputProps }}
 			{...otherProps}
 		/>
 	)

@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
+
 import {
-	Button,
 	Dialog,
 	DialogActions,
 	DialogContent,
@@ -9,22 +9,24 @@ import {
 	styled,
 } from '@mui/material'
 
+import { Button } from '../../UI'
+
 interface DialogProps extends MuiDialogProps {}
 
 type ModalProps = DialogProps & {
-	title: React.ReactNode | string
+	title?: React.ReactNode | string
 	onClose: () => void
-	buttonLabel?: string
-	onClick: () => void
+	onConfirm: () => void
+	confirmLabel?: string
 }
 
 export const Modal: FC<ModalProps> = ({
 	open,
 	children,
 	onClose,
-	title,
-	buttonLabel = 'Сохранить',
-	onClick,
+	title = 'Название',
+	confirmLabel = 'Сохранить',
+	onConfirm,
 	...restProps
 }) => {
 	return (
@@ -38,9 +40,12 @@ export const Modal: FC<ModalProps> = ({
 			<DialogTitle className='title'>{title}</DialogTitle>
 			<DialogContent className='content'>{children}</DialogContent>
 			<DialogActions className='actions'>
-                {/* @TODO button styles */}
-				<Button onClick={onClose}>Отменить</Button>
-				<Button onClick={onClick}>{buttonLabel}</Button>
+				<StyledButton variant='outlined' onClick={onClose}>
+					Отменить
+				</StyledButton>
+				<StyledButton variant='contained' onClick={onConfirm}>
+					{confirmLabel}
+				</StyledButton>
 			</DialogActions>
 		</StyledModal>
 	)
@@ -66,6 +71,14 @@ const StyledModal = styled(Dialog)(() => {
 		},
 		'& .actions': {
 			padding: 0,
+			columnGap: '20px',
+		},
+		'& .actions > :not(:first-of-type)': {
+			margin: '0',
 		},
 	}
 })
+
+const StyledButton = styled(Button)(() => ({
+	width: '230px',
+}))
