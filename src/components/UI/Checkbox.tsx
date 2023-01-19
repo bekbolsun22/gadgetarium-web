@@ -10,13 +10,18 @@ interface CheckboxProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Checkbox: React.FC<CheckboxProps> = ({ checked, onChange }) => {
+const Checkbox: React.FC<CheckboxProps> = ({
+  checked,
+  onChange,
+  ...restProps
+}) => {
   return (
     <MuiCheckbox
       checked={checked}
       onChange={onChange}
       icon={<CheckboxDefaultIcon />}
       checkedIcon={<CheckboxActiveIcon />}
+      {...restProps}
     />
   );
 };
