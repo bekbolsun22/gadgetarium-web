@@ -7,7 +7,6 @@ export interface IButtonProps extends ButtonProps {
     variant?: 'text' | 'outlined' | 'contained' | undefined;
     onClick: () => void;
 }
-
 export interface IIconButtonProps extends ButtonProps {
     onClick: () => void;
     icon?: ReactNode;
